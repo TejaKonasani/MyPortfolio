@@ -31,44 +31,46 @@ export default function Education() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="py-28 md:py-[100px] bg-bg-primary">
-      <div ref={ref} className="max-w-content mx-auto px-6">
+    <section id="education" className="py-8 md:py-10 bg-transparent relative overflow-hidden">
+      {/* Background ambient light */}
+      <div className="absolute top-1/2 left-0 w-72 h-72 bg-accent-primary/5 rounded-full blur-[90px] pointer-events-none" />
+
+      <div ref={ref} className="max-w-home-content mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-accent-primary font-semibold text-sm uppercase tracking-wider">Education</span>
-          <h2 className="font-heading font-bold text-3xl md:text-4xl mt-2 mb-12">
-            Academic Background
+          <h2 className="font-heading font-extrabold text-[52px] tracking-tight mb-[28px] bg-gradient-to-r from-[#5DCAA5] to-[#7F77DD] bg-clip-text text-transparent">
+            Education
           </h2>
         </motion.div>
 
-        <div className="max-w-2xl relative">
+        <div className="max-w-3xl relative">
           {/* Timeline line */}
-          <div className="absolute left-[19px] top-4 bottom-4 w-px bg-gradient-to-b from-accent-primary via-accent-primary/30 to-transparent" />
+          <div className="absolute left-[19px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-accent-light via-accent-light/40 to-transparent" />
 
-          <div className="space-y-8">
+          <div className="space-y-10">
             {education.map((edu, i) => (
               <motion.div
                 key={edu.institution}
                 initial={{ opacity: 0, x: -24 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
-                className="relative flex gap-6"
+                className="relative flex gap-8"
               >
                 {/* Timeline dot */}
-                <div className="shrink-0 w-10 h-10 rounded-full bg-surface border-2 border-accent-primary flex items-center justify-center z-10">
-                  <GraduationCap size={16} className="text-accent-primary" />
+                <div className="shrink-0 w-10 h-10 rounded-full bg-[#0a1023] border-2 border-accent-light flex items-center justify-center z-10 shadow-[0_0_15px_rgba(103,232,249,0.4)] animate-pulse">
+                  <GraduationCap size={16} className="text-accent-light" />
                 </div>
 
-                <div className="bg-surface border border-white/10 rounded-2xl p-6 flex-1 hover:border-accent-primary/30 transition-all duration-250">
-                  <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                    <h3 className="font-heading font-semibold text-lg text-text-primary">{edu.institution}</h3>
-                    <span className="text-text-secondary text-sm shrink-0">{edu.year}</span>
+                <div className="bg-[#0a1023]/45 border border-white/[0.12] backdrop-blur-[12px] rounded-[24px] p-8 flex-1 hover:-translate-y-1 hover:border-accent-primary/50 hover:shadow-[0_8px_32px_rgba(110,86,248,0.12)] hover:bg-[#0a1023]/60 transition-all duration-300 ease-out shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+                  <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+                    <h3 className="font-heading font-bold text-[28px] text-text-primary leading-tight">{edu.institution}</h3>
+                    <span className="text-text-muted text-sm font-mono tracking-wide shrink-0">{edu.year}</span>
                   </div>
-                  <p className="text-accent-primary font-medium">{edu.degree}</p>
-                  <p className="text-text-secondary text-sm mt-1">{edu.result}</p>
+                  <p className="text-accent-light font-semibold">{edu.degree}</p>
+                  <p className="text-text-body text-[18px] leading-[1.8] font-normal mt-2">{edu.result}</p>
                 </div>
               </motion.div>
             ))}

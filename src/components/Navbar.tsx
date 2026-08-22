@@ -3,22 +3,20 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import Search from './Search';
 
-const navLinks = [
-  { name: 'About', href: '#about' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Contact', href: '#contact' },
-];
+
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isLanding = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -28,38 +26,86 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 h-[72px] flex items-center transition-all duration-300 ${
           scrolled
-            ? 'bg-bg-primary/80 glass border-b border-white/5 py-3'
-            : 'bg-transparent py-5'
+            ? 'bg-bg-primary/80 backdrop-blur-[20px] border-b border-white/5 shadow-[0_4px_30px_rgba(110,86,248,0.15)]'
+            : 'bg-transparent'
         }`}
       >
-        <div className="max-w-content mx-auto px-6 flex items-center justify-between">
-          <a href="#" className="font-heading font-bold text-2xl gradient-text">
-            Teja
-          </a>
-
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-text-secondary hover:text-accent-primary transition-colors duration-200 text-sm font-medium"
-              >
-                {link.name}
-              </a>
-            ))}
+        <div className="w-full px-6 md:px-10 lg:px-12 flex items-center justify-between">
+          {/* Left Side: Desktop Links */}
+          <div className={`hidden md:flex items-center ${isLanding ? 'gap-8 lg:gap-10' : 'gap-6 lg:gap-8'}`}>
             <a
-              href="#"
-              className="bg-gradient-to-r from-accent-primary to-violet-500 text-white font-semibold text-sm px-5 py-2.5 rounded-lg shadow-glow hover:shadow-glow-hover hover:scale-105 active:scale-[0.97] transition-all duration-200"
+              href="#about"
+              className={
+                isLanding
+                  ? 'text-white hover:text-accent-primary transition-all duration-200 text-[18px] font-bold tracking-tight leading-none'
+                  : 'text-text-secondary hover:text-accent-primary transition-all duration-200 text-[16px] font-medium'
+              }
             >
-              Resume
+              About
+            </a>
+            <a
+              href="#experience"
+              className={
+                isLanding
+                  ? 'text-white hover:text-accent-primary transition-all duration-200 text-[18px] font-bold tracking-tight leading-none'
+                  : 'text-text-secondary hover:text-accent-primary transition-all duration-200 text-[16px] font-medium'
+              }
+            >
+              Experience
+            </a>
+            <a
+              href="#projects"
+              className={
+                isLanding
+                  ? 'text-white hover:text-accent-primary transition-all duration-200 text-[18px] font-bold tracking-tight leading-none'
+                  : 'text-text-secondary hover:text-accent-primary transition-all duration-200 text-[16px] font-medium'
+              }
+            >
+              Projects
+            </a>
+            <a
+              href="#contact"
+              className={
+                isLanding
+                  ? 'text-white hover:text-accent-primary transition-all duration-200 text-[18px] font-bold tracking-tight leading-none'
+                  : 'text-text-secondary hover:text-accent-primary transition-all duration-200 text-[16px] font-medium'
+              }
+            >
+              Contact
+            </a>
+          </div>
+
+          {/* Center: Search Bar */}
+          <div className="hidden md:block">
+            <Search />
+          </div>
+
+          {/* Right Side: Resume Button */}
+          <div className="hidden md:block">
+            <a
+              href="/resume/Teja_Konasani_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`uiverse-resume-btn py-2.5 px-6 scale-90 ${
+                isLanding ? '!h-[48px] !min-w-[130px] !text-[15px]' : ''
+              }`}
+            >
+              <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+              <span className="text">Resume</span>
+              <span className="circle"></span>
+              <svg viewBox="0 0 24 24" className="arr-1" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
             </a>
           </div>
 
           <button
             onClick={() => setMobileOpen(true)}
-            className="md:hidden text-text-primary"
+            className="md:hidden text-text-primary ml-auto"
           >
             <Menu size={24} />
           </button>
@@ -83,28 +129,62 @@ export default function Navbar() {
               transition={{ type: 'tween', duration: 0.3 }}
               className="fixed top-0 right-0 bottom-0 w-72 bg-bg-secondary z-50 border-l border-white/5 p-6"
             >
-              <div className="flex justify-between items-center mb-8">
-                <span className="font-heading font-bold text-xl gradient-text">Teja</span>
+              <div className="flex justify-end items-center mb-8">
                 <button onClick={() => setMobileOpen(false)} className="text-text-primary">
                   <X size={24} />
                 </button>
               </div>
               <div className="flex flex-col gap-4">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="text-text-secondary hover:text-accent-primary transition-colors py-2 text-lg font-medium"
-                  >
-                    {link.name}
-                  </a>
-                ))}
                 <a
-                  href="#"
-                  className="bg-gradient-to-r from-accent-primary to-violet-500 text-white font-semibold text-center px-5 py-3 rounded-lg shadow-glow mt-4"
+                  href="#about"
+                  onClick={() => setMobileOpen(false)}
+                  className="text-text-secondary hover:text-accent-primary transition-colors py-2 text-lg font-medium"
                 >
-                  Resume
+                  About
+                </a>
+
+                <div className="py-2">
+                  <Search />
+                </div>
+
+                <a
+                  href="#experience"
+                  onClick={() => setMobileOpen(false)}
+                  className="text-text-secondary hover:text-accent-primary transition-colors py-2 text-lg font-medium"
+                >
+                  Experience
+                </a>
+
+                <a
+                  href="#projects"
+                  onClick={() => setMobileOpen(false)}
+                  className="text-text-secondary hover:text-accent-primary transition-colors py-2 text-lg font-medium"
+                >
+                  Projects
+                </a>
+
+                <a
+                  href="#contact"
+                  onClick={() => setMobileOpen(false)}
+                  className="text-text-secondary hover:text-accent-primary transition-colors py-2 text-lg font-medium"
+                >
+                  Contact
+                </a>
+
+                <a
+                  href="/resume/Teja_Konasani_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="uiverse-resume-btn"
+                >
+                  <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                  </svg>
+                  <span className="text">Resume</span>
+                  <span className="circle"></span>
+                  <svg viewBox="0 0 24 24" className="arr-1" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                  </svg>
                 </a>
               </div>
             </motion.div>

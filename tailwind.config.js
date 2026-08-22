@@ -12,19 +12,23 @@ module.exports = {
         accent: {
           primary: '#6E56F8',
           secondary: '#22D3EE',
-          light: '#B9A9FF',
+          light: '#67E8F9',
         },
         text: {
-          primary: '#F5F5F7',
-          secondary: '#9CA3AF',
+          primary: '#FFFFFF',
+          secondary: '#E2E8F0',
+          body: '#E5E7F5',
+          muted: '#A8B4D4',
         },
       },
       fontFamily: {
         heading: ['var(--font-space-grotesk)', 'Inter', 'sans-serif'],
         body: ['var(--font-inter)', 'Manrope', 'sans-serif'],
+        mono: ['var(--font-jetbrains-mono)', 'monospace'],
       },
       maxWidth: {
-        'content': '1140px',
+        'content': '1280px',
+        'home-content': 'min(94vw, 1600px)',
       },
       boxShadow: {
         'glow': '0 0 24px rgba(110,86,248,0.35)',

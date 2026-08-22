@@ -34,15 +34,17 @@ export default function Certifications() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="py-28 md:py-[100px] bg-bg-secondary">
-      <div ref={ref} className="max-w-content mx-auto px-6">
+    <section id="certifications" className="py-8 md:py-10 bg-transparent relative overflow-hidden">
+      {/* Background ambient light */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-accent-primary/5 rounded-full blur-[100px] pointer-events-none" />
+
+      <div ref={ref} className="max-w-home-content mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-accent-primary font-semibold text-sm uppercase tracking-wider">Certifications & Achievements</span>
-          <h2 className="font-heading font-bold text-3xl md:text-4xl mt-2 mb-12">
+          <h2 className="font-heading font-extrabold text-[52px] tracking-tight mb-8 bg-gradient-to-r from-[#5DCAA5] to-[#7F77DD] bg-clip-text text-transparent">
             Credentials & Recognition
           </h2>
         </motion.div>
@@ -51,23 +53,27 @@ export default function Certifications() {
           variants={container}
           initial="hidden"
           animate={inView ? 'show' : 'hidden'}
-          className="grid md:grid-cols-2 gap-6"
+          className="grid md:grid-cols-2 gap-8"
         >
           {/* Certifications */}
-          <motion.div variants={item} className="bg-surface border border-white/10 rounded-2xl p-8">
+          <motion.div
+            variants={item}
+            whileHover={{ y: -4 }}
+            className="bg-[#0a1023]/45 border border-white/[0.12] backdrop-blur-[12px] rounded-[24px] p-9 hover:border-accent-primary/50 hover:shadow-[0_8px_32px_rgba(110,86,248,0.12)] hover:bg-[#0a1023]/60 transition-all duration-300 ease-out shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]"
+          >
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg bg-accent-primary/10">
-                <Award size={22} className="text-accent-primary" />
+              <div className="p-2.5 rounded-xl bg-accent-light/10">
+                <Award size={24} className="text-accent-light" />
               </div>
-              <h3 className="font-heading font-semibold text-xl text-text-primary">Certifications</h3>
+              <h3 className="font-heading font-bold text-[28px] text-text-primary">Certifications</h3>
             </div>
             <div className="space-y-4">
               {certifications.map((cert) => (
                 <div key={cert.title} className="flex items-start gap-3">
-                  <span className="text-accent-primary mt-1.5 shrink-0">▹</span>
+                  <span className="text-accent-light mt-1.5 shrink-0">▹</span>
                   <div>
-                    <p className="text-text-primary font-medium">{cert.title}</p>
-                    <p className="text-text-secondary text-sm">{cert.year}</p>
+                    <p className="text-text-primary font-semibold">{cert.title}</p>
+                    <p className="text-text-muted text-sm font-mono tracking-wide">{cert.year}</p>
                   </div>
                 </div>
               ))}
@@ -75,20 +81,24 @@ export default function Certifications() {
           </motion.div>
 
           {/* Achievements */}
-          <motion.div variants={item} className="bg-surface border border-white/10 rounded-2xl p-8">
+          <motion.div
+            variants={item}
+            whileHover={{ y: -4 }}
+            className="bg-[#0a1023]/45 border border-white/[0.12] backdrop-blur-[12px] rounded-[24px] p-9 hover:border-accent-secondary/50 hover:shadow-[0_8px_32px_rgba(34,211,238,0.12)] hover:bg-[#0a1023]/60 transition-all duration-300 ease-out shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]"
+          >
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg bg-accent-primary/10">
-                <Trophy size={22} className="text-accent-primary" />
+              <div className="p-2.5 rounded-xl bg-accent-light/10">
+                <Trophy size={24} className="text-accent-light" />
               </div>
-              <h3 className="font-heading font-semibold text-xl text-text-primary">Achievements</h3>
+              <h3 className="font-heading font-bold text-[28px] text-text-primary">Achievements</h3>
             </div>
             <div className="space-y-4">
               {achievements.map((ach) => (
                 <div key={ach.title} className="flex items-start gap-3">
-                  <span className="text-accent-primary mt-1.5 shrink-0">▹</span>
+                  <span className="text-accent-light mt-1.5 shrink-0">▹</span>
                   <div>
-                    <p className="text-text-primary font-medium">{ach.title}</p>
-                    <p className="text-text-secondary text-sm">{ach.year}</p>
+                    <p className="text-text-primary font-semibold">{ach.title}</p>
+                    <p className="text-text-muted text-sm font-mono tracking-wide">{ach.year}</p>
                   </div>
                 </div>
               ))}

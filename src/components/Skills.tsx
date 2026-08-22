@@ -67,27 +67,23 @@ export default function Skills() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="skills" className="py-28 md:py-[100px] bg-bg-primary">
-      <div ref={ref} className="max-w-content mx-auto px-6">
+    <section id="skills" className="py-8 md:py-10 bg-transparent">
+      <div ref={ref} className="max-w-home-content mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-accent-primary font-semibold text-sm uppercase tracking-wider">Skills</span>
-          <h2 className="font-heading font-bold text-3xl md:text-4xl mt-2 mb-4">
-            My Tech Stack
+          <h2 className="font-heading font-extrabold text-[52px] tracking-tight mb-[28px] bg-gradient-to-r from-[#5DCAA5] to-[#7F77DD] bg-clip-text text-transparent">
+            Technology Stack
           </h2>
-          <p className="text-text-secondary max-w-2xl">
-            The tools and technologies I use to build <span className="text-accent-primary font-semibold">production-ready</span> applications.
-          </p>
         </motion.div>
 
         <motion.div
           variants={container}
           initial="hidden"
           animate={inView ? 'show' : 'hidden'}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8"
         >
           {skillCategories.map((category) => {
             const Icon = category.icon;
@@ -95,19 +91,19 @@ export default function Skills() {
               <motion.div
                 key={category.name}
                 variants={item}
-                className="bg-surface border border-white/10 rounded-2xl p-6 hover:border-accent-primary/30 transition-all duration-250"
+                className="bg-[#0a1023]/45 border border-white/[0.12] backdrop-blur-[12px] rounded-[24px] p-8 hover:-translate-y-1 hover:scale-[1.03] hover:border-accent-primary/50 hover:shadow-[0_8px_32px_rgba(110,86,248,0.12)] hover:bg-[#0a1023]/60 transition-all duration-300 ease-out shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]"
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-lg bg-accent-primary/10">
-                    <Icon size={20} className="text-accent-primary" />
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2.5 rounded-xl bg-accent-light/10 shadow-[0_0_15px_rgba(103,232,249,0.15)]">
+                    <Icon size={22} className="text-accent-light" />
                   </div>
-                  <h3 className="font-heading font-semibold text-text-primary">{category.name}</h3>
+                  <h3 className="font-heading font-bold text-xl text-text-primary">{category.name}</h3>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-1.5 rounded-full text-xs font-medium bg-accent-primary/10 text-accent-light border border-accent-primary/15 hover:scale-105 transition-transform duration-200 cursor-default"
+                      className="px-3.5 py-2 rounded-full text-xs font-mono font-medium bg-accent-primary/5 text-accent-light border border-accent-primary/15 hover:scale-105 transition-all duration-200 cursor-default backdrop-blur-sm"
                     >
                       {skill}
                     </span>

@@ -50,16 +50,15 @@ export default function Experience() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="experience" className="py-28 md:py-[100px] bg-bg-primary">
-      <div ref={ref} className="max-w-content mx-auto px-6">
+    <section id="experience" className="py-8 md:py-10 bg-transparent">
+      <div ref={ref} className="max-w-home-content mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-accent-primary font-semibold text-sm uppercase tracking-wider">Experience</span>
-          <h2 className="font-heading font-bold text-3xl md:text-4xl mt-2 mb-12">
-            Where I&apos;ve Worked
+          <h2 className="font-heading font-extrabold text-[52px] tracking-tight mb-[28px] bg-gradient-to-r from-[#5DCAA5] to-[#7F77DD] bg-clip-text text-transparent">
+            Experience
           </h2>
         </motion.div>
 
@@ -67,31 +66,31 @@ export default function Experience() {
           variants={container}
           initial="hidden"
           animate={inView ? 'show' : 'hidden'}
-          className="grid md:grid-cols-2 gap-6"
+          className="grid md:grid-cols-2 gap-8"
         >
           {experiences.map((exp, i) => (
             <motion.div
               key={exp.company}
               variants={item}
-              whileHover={{ y: -6 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="bg-surface border border-white/10 rounded-2xl p-8 hover:border-accent-primary/40 hover:shadow-card-hover transition-all duration-250"
+              whileHover={{ y: -4 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="bg-[#0a1023]/45 border border-white/[0.12] backdrop-blur-[12px] rounded-[24px] p-9 hover:border-accent-primary/50 hover:shadow-[0_8px_32px_rgba(110,86,248,0.12)] hover:bg-[#0a1023]/60 transition-all duration-300 ease-out shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]"
             >
-              <div className="flex items-start justify-between mb-4">
+              <div className="flex items-start justify-between mb-6">
                 <div>
-                  <h3 className="font-heading font-semibold text-xl text-text-primary">{exp.company}</h3>
-                  <p className="text-accent-primary font-medium mt-1">{exp.role}</p>
+                  <h3 className="font-heading font-bold text-[28px] text-text-primary leading-tight">{exp.company}</h3>
+                  <p className="text-accent-light font-semibold mt-1">{exp.role}</p>
                 </div>
-                <div className="flex items-center gap-1.5 text-text-secondary text-sm shrink-0">
+                <div className="flex items-center gap-1.5 text-text-muted text-sm font-mono shrink-0">
                   <Calendar size={14} />
                   {exp.period}
                 </div>
               </div>
 
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-4 mb-8">
                 {exp.bullets.map((bullet, bi) => (
-                  <li key={bi} className="text-text-secondary text-sm leading-relaxed flex gap-3">
-                    <span className="text-accent-primary mt-1.5 shrink-0">▹</span>
+                  <li key={bi} className="text-text-body text-[18px] leading-[1.8] font-normal flex gap-3">
+                    <span className="text-accent-light mt-1.5 shrink-0">▹</span>
                     <span>{bullet}</span>
                   </li>
                 ))}
@@ -101,7 +100,7 @@ export default function Experience() {
                 {exp.stack.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 rounded-full text-xs font-medium bg-accent-primary/12 text-accent-light border border-accent-primary/20"
+                    className="px-3 py-1 rounded-full text-xs font-mono font-medium bg-accent-primary/5 text-accent-light border border-accent-primary/15 hover:scale-105 transition-all duration-200 backdrop-blur-sm"
                   >
                     {tech}
                   </span>
