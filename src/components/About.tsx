@@ -50,7 +50,7 @@ export default function About() {
               className="w-full flex items-center justify-end relative"
             >
               <Image
-                src="/images/about-illustration.png"
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/about-illustration.png`}
                 alt="AI Developer Illustration"
                 width={400}
                 height={400}
