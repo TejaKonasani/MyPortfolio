@@ -1,7 +1,15 @@
 /** @type {import('next').NextConfig} */
+const isGithubPages = process.env.GITHUB_ACTIONS || false;
+
 const nextConfig = {
   reactStrictMode: true,
+
+  output: 'export',
+
+  trailingSlash: true,
+
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -9,5 +17,13 @@ const nextConfig = {
       },
     ],
   },
+
+  ...(isGithubPages
+    ? {
+        basePath: '/MyPortfolio',
+        assetPrefix: '/MyPortfolio/',
+      }
+    : {}),
 };
+
 module.exports = nextConfig;
