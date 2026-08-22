@@ -18,6 +18,10 @@ const nextConfig = {
     ],
   },
 
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isGithubPages ? '/MyPortfolio' : '',
+  },
+
   ...(isGithubPages
     ? {
         basePath: '/MyPortfolio',

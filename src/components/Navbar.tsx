@@ -85,7 +85,7 @@ export default function Navbar() {
           {/* Right Side: Resume Button */}
           <div className="hidden md:block">
             <a
-              href="/resume/Teja_Konasani_Resume.pdf"
+              href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/resume/Teja_Konasani_Resume.pdf`}
               target="_blank"
               rel="noopener noreferrer"
               className={`uiverse-resume-btn py-2.5 px-6 scale-90 ${
@@ -172,7 +172,7 @@ export default function Navbar() {
                 </a>
 
                 <a
-                  href="/resume/Teja_Konasani_Resume.pdf"
+                  href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/resume/Teja_Konasani_Resume.pdf`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="uiverse-resume-btn"

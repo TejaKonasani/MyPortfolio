@@ -18,7 +18,7 @@ export default function Home() {
       <div 
         className="fixed inset-0 w-full h-full pointer-events-none z-[-30]"
         style={{
-          backgroundImage: "url('/images/home-bg-static.jpg')",
+          backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/home-bg-static.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',

@@ -15,7 +15,7 @@ export default function LandingPage() {
         preload="metadata"
         className="fixed inset-0 w-full h-full object-cover pointer-events-none z-[-30] opacity-[0.45]"
       >
-        <source src="/images/tech-background.mp4" type="video/mp4" />
+        <source src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/tech-background.mp4`} type="video/mp4" />
       </video>
 
       {/* Layer 3: Dark overlay to control overall contrast */}
@@ -95,7 +95,7 @@ export default function LandingPage() {
               </svg>
             </Link>
             <a
-              href="/resume/Teja_Konasani_Resume.pdf"
+              href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/resume/Teja_Konasani_Resume.pdf`}
               target="_blank"
               rel="noopener noreferrer"
               className="uiverse-resume-btn"
