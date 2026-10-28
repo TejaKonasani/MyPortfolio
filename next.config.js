@@ -8,6 +8,11 @@ const nextConfig = {
 
   trailingSlash: true,
 
+  // Give slow / CPU-capped CI environments enough time to statically
+  // export the pages (default is 60s). Does not change the output mode,
+  // sub-path, or the deployment workflow.
+  staticPageGenerationTimeout: 300,
+
   images: {
     unoptimized: true,
     remotePatterns: [
