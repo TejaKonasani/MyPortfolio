@@ -1,56 +1,98 @@
-export default function Hero() {
+'use client';
+
+import dynamic from 'next/dynamic';
+import { profile } from '@/lib/data';
+
+// Lazy-load the 3D scene (client-only, no SSR) so text content appears first.
+const HeroScene = dynamic(() => import('./HeroScene'), {
+  ssr: false,
+  loading: () => null,
+});
+
+/** Slowly rotating circular "OPEN TO WORK ✦" badge (SVG textPath, 14s). */
+function OpenToWorkBadge() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-start overflow-hidden bg-transparent text-text-primary px-6 md:px-10 lg:px-12 pt-[72px]">
-      {/* Dark overlay for Hero background */}
-      <div className="absolute inset-0 bg-[#050608]/40 pointer-events-none z-[-20]" />
+    <div className="absolute top-24 right-6 md:top-28 md:right-12 lg:right-16 w-[110px] h-[110px] md:w-[150px] md:h-[150px] z-20 pointer-events-none select-none">
+      <svg viewBox="0 0 200 200" className="w-full h-full spin-badge" aria-hidden="true">
+        <defs>
+          <path id="badge-circle" d="M 100,100 m -74,0 a 74,74 0 1,1 148,0 a 74,74 0 1,1 -148,0" />
+        </defs>
+        <text
+          fill="currentColor"
+          className="font-mono"
+          style={{ fontSize: '19.5px', letterSpacing: '0.18em' }}
+        >
+          <textPath href="#badge-circle">OPEN TO WORK ✦ OPEN TO WORK ✦</textPath>
+        </text>
+      </svg>
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 flex items-center justify-center text-[26px] md:text-[34px]"
+      >
+        ✦
+      </span>
+    </div>
+  );
+}
 
-      {/* Theme-harmonized gradient tint (Violet/Indigo/Cyan) */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-[#8B5CF6]/5 via-[#6366F1]/5 to-[#38BDF8]/5 pointer-events-none z-[-10]" />
+export default function Hero() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
-      {/* Static background glows (no animation to preserve performance and remove movement) */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-accent-primary/10 rounded-full blur-[120px]" />
-        <div className="absolute top-1/3 right-0 w-80 h-80 bg-accent-secondary/10 rounded-full blur-[100px]" />
+  const scrollToWork = () => {
+    const el = document.getElementById('work');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  return (
+    <section
+      id="top"
+      aria-label="Introduction"
+      className="relative min-h-screen flex flex-col justify-end overflow-hidden px-6 md:px-10 lg:px-12 pb-16 md:pb-20 pt-24"
+    >
+      {/* 3D scene: right side on desktop, centered above text on mobile */}
+      <div className="absolute inset-x-0 top-[88px] bottom-[38%] md:inset-x-auto md:right-0 md:top-0 md:bottom-0 md:w-[52%] lg:w-[46%] z-[2]">
+        <HeroScene />
       </div>
 
-      <div className="relative z-10 max-w-home-content w-full mx-auto flex flex-col items-start justify-center">
-        {/* Intro tag with horizontal gradient line */}
-        <div className="flex items-center gap-4 mb-4">
-          <span className="text-[18px] md:text-[20px] font-medium tracking-normal text-[#FFFFFF]">
-            Hi I'm
+      <OpenToWorkBadge />
+
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto">
+        {/* Pill label */}
+        <div className="inline-flex items-center gap-2.5 bg-ink text-bg border-2 border-ink rounded-full px-5 py-2.5 mb-8">
+          <span aria-hidden="true" className="w-2.5 h-2.5 rounded-full bg-lime inline-block" />
+          <span className="font-mono text-[13px] md:text-[14px] font-medium tracking-[0.06em]">
+            {profile.role}
           </span>
-          <div className="h-[2px] w-[100px] md:w-[140px] bg-gradient-to-r from-[#8B5CF6] via-[#6366F1] to-[#38BDF8]" />
         </div>
 
-        {/* Large typography-focused name */}
-        <h1 
-          className="font-heading tracking-[-3px] mb-8 leading-[1.05] text-left text-[58px] sm:text-[78px] md:text-[98px] font-black"
-          style={{ 
-            background: 'linear-gradient(90deg, #4ADEDE 0%, #8B7FE8 50%, #D4537E 100%)', 
-            WebkitBackgroundClip: 'text', 
-            backgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            color: 'transparent'
-          }}
-        >
-          Konasani Teja
+        {/* Giant headline */}
+        <h1 className="display-hero text-ink">
+          {profile.firstName}
           <br />
-          Maheswara Reddy
+          <span className="accent-serif text-pop">builds</span> things
+          <br />
+          that think.
         </h1>
 
-        {/* Rounded border pill for professional title */}
-        <div className="border border-[#6E56F8]/50 bg-[#6E56F8]/5 px-6 py-2.5 rounded-full inline-block mb-8 text-[16px] md:text-[18px] font-bold text-[#FFFFFF] tracking-tight">
-          AI & Data Science Graduate
-        </div>
-
-        {/* Left vertical gradient border description box */}
-        <div className="relative pl-6 text-left">
-          <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#8B5CF6] via-[#6366F1] to-[#38BDF8]" />
-          <p className="text-[#FFFFFF] text-[16px] md:text-[19px] leading-[1.6] font-normal max-w-[580px]">
-            Passionate, fast-learning problem solver who leads with
-            <br className="hidden sm:inline" />
-            initiative, discipline, and consistent execution.
+        {/* Real bio + buttons */}
+        <div className="mt-10 md:mt-12 flex flex-col md:flex-row md:items-end gap-8 md:gap-12">
+          <p className="font-mono text-[15px] md:text-[16px] text-muted max-w-[520px] leading-[1.65]">
+            {profile.heroBio}
           </p>
+
+          <div className="flex flex-wrap items-center gap-5 shrink-0">
+            <button type="button" onClick={scrollToWork} className="btn btn-primary">
+              See my work ↓
+            </button>
+            <a
+              href={`${basePath}${profile.resumePath}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary"
+            >
+              Resume ↗
+            </a>
+          </div>
         </div>
       </div>
     </section>
