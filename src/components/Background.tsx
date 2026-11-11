@@ -8,11 +8,11 @@ const GRAIN =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E";
 
 /**
- * Warm-cream background layers:
- *  - fixed film-grain overlay (opacity ~0.07)
- *  - one large blurred lime blob that follows the mouse with an
- *    easing delay (~0.9s). Multiply in light mode, screen in dark.
- *  - blob disabled on touch devices and under prefers-reduced-motion.
+ * Premium dark background layers:
+ *  - Fixed film-grain overlay (exact 3.5% opacity for tactile surface depth)
+ *  - Subtle mouse-following lime atmospheric glow with soft easing delay (~0.9s)
+ *  - Ambient soft glows for overall page depth
+ *  - Fully disabled under prefers-reduced-motion or coarse pointer
  */
 export default function Background() {
   const blobRef = useRef<HTMLDivElement>(null);
@@ -37,10 +37,10 @@ export default function Background() {
 
     const tick = () => {
       if (!running) return;
-      // ~0.9s easing delay toward the cursor
+      // ~0.9s easing delay toward cursor
       x += (targetX - x) * 0.045;
       y += (targetY - y) * 0.045;
-      blob.style.transform = `translate3d(${x - 170}px, ${y - 170}px, 0)`;
+      blob.style.transform = `translate3d(${x - 190}px, ${y - 190}px, 0)`;
       raf = requestAnimationFrame(tick);
     };
 
@@ -56,13 +56,13 @@ export default function Background() {
 
   return (
     <>
-      {/* film grain */}
+      {/* 3.5% opacity film grain overlay */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-[1] opacity-[0.07] mix-blend-multiply dark:mix-blend-screen"
+        className="pointer-events-none fixed inset-0 z-[1] opacity-[0.035] mix-blend-screen"
         style={{ backgroundImage: `url("${GRAIN}")`, backgroundSize: '240px 240px' }}
       />
-      {/* mouse-following lime blob */}
+      {/* Mouse-following atmospheric lime glow */}
       <div ref={blobRef} aria-hidden="true" className="blob" />
     </>
   );

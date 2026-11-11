@@ -5,18 +5,25 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'media',
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        // Editorial neo-brutalist palette — themed via CSS variables (light/dark)
+        // Design tokens for premium dark theme
         bg: 'var(--c-bg)',
-        ink: 'var(--c-ink)',
-        card: 'var(--c-card)',
+        surface: 'var(--c-surface)',
+        raised: 'var(--c-surface-raised)',
+        border: 'var(--c-border)',
+        'border-hover': 'var(--c-border-hover)',
+        main: 'var(--c-text)',
+        ink: 'var(--c-text)',
+        card: 'var(--c-surface)',
         muted: 'var(--c-muted)',
-        pop: '#FF4D1F',
-        lime: '#C8F13C',
-        sky: '#8FB8FF',
+        lime: '#c8f542',
+        orange: '#ff6a3d',
+        blue: '#7da6ff',
+        pop: '#ff6a3d',
+        sky: '#7da6ff',
       },
       fontFamily: {
         display: ['var(--font-bricolage)', 'system-ui', 'sans-serif'],

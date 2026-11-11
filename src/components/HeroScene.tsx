@@ -3,13 +3,13 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * Three.js hero scene:
- *  - glossy solid orange TorusKnot (MeshStandardMaterial, roughness 0.28)
- *  - a lime sphere and a sky-blue octahedron orbiting it
- *  - ambient light + one directional light, transparent canvas
- *  - continuous rotation + mouse reaction
- *  - pixel ratio capped at 2, paused off-screen, disposed on unmount,
- *    wrapped in try/catch so the page still works without WebGL.
+ * Three.js hero 3D scene (Dark Mode Adapted):
+ *  - Glossy dark-metallic TorusKnot reflecting lime and orange point lights
+ *  - Subtle concentric wireframe icosahedron in lime/orange
+ *  - Orbiting glowing lime sphere and sky-blue octahedron
+ *  - Mouse parallax easing
+ *  - IntersectionObserver pauses off-screen, pixel ratio capped at 2
+ *  - prefers-reduced-motion static render, full resource disposal on unmount
  */
 export default function HeroScene() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -29,10 +29,11 @@ export default function HeroScene() {
 
         const width = mount.clientWidth;
         const height = mount.clientHeight;
+        if (width === 0 || height === 0) return;
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-        camera.position.set(0, 0, 7);
+        camera.position.set(0, 0, 7.2);
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -40,44 +41,68 @@ export default function HeroScene() {
         renderer.domElement.style.display = 'block';
         mount.appendChild(renderer.domElement);
 
-        // Lights: ambient + one directional
-        const ambient = new THREE.AmbientLight(0xffffff, 0.85);
+        // Lighting: dark ambient + vibrant lime & orange point lights
+        const ambient = new THREE.AmbientLight(0x202024, 1.2);
         scene.add(ambient);
-        const directional = new THREE.DirectionalLight(0xffffff, 1.6);
-        directional.position.set(4, 6, 8);
-        scene.add(directional);
 
-        // Glossy orange torus knot
-        const knotGeometry = new THREE.TorusKnotGeometry(1.05, 0.34, 220, 32);
+        const limeLight = new THREE.PointLight(0xc8f542, 3.8, 18);
+        limeLight.position.set(-3.5, 3.5, 4.5);
+        scene.add(limeLight);
+
+        const orangeLight = new THREE.PointLight(0xff6a3d, 4.2, 18);
+        orangeLight.position.set(3.5, -3, 4);
+        scene.add(orangeLight);
+
+        const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
+        keyLight.position.set(1, 6, 7);
+        scene.add(keyLight);
+
+        // Glossy dark-metallic torus knot
+        const knotGeometry = new THREE.TorusKnotGeometry(1.08, 0.32, 220, 32);
         const knotMaterial = new THREE.MeshStandardMaterial({
-          color: 0xff4d1f,
-          roughness: 0.28,
-          metalness: 0.35,
+          color: 0x18181d,
+          roughness: 0.18,
+          metalness: 0.88,
         });
         const knot = new THREE.Mesh(knotGeometry, knotMaterial);
         scene.add(knot);
 
+        // Subtle rotating wireframe icosahedron accent (lime with slight transparency)
+        const wireGeometry = new THREE.IcosahedronGeometry(1.85, 1);
+        const wireMaterial = new THREE.MeshBasicMaterial({
+          color: 0xc8f542,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.18,
+        });
+        const wireMesh = new THREE.Mesh(wireGeometry, wireMaterial);
+        scene.add(wireMesh);
+
         // Orbiters: lime sphere + sky octahedron
-        const sphereGeometry = new THREE.SphereGeometry(0.32, 48, 48);
+        const sphereGeometry = new THREE.SphereGeometry(0.3, 48, 48);
         const sphereMaterial = new THREE.MeshStandardMaterial({
-          color: 0xc8f13c,
-          roughness: 0.35,
-          metalness: 0.2,
+          color: 0xc8f542,
+          emissive: 0xc8f542,
+          emissiveIntensity: 0.3,
+          roughness: 0.25,
+          metalness: 0.4,
         });
         const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
         scene.add(sphere);
 
-        const octaGeometry = new THREE.OctahedronGeometry(0.34);
+        const octaGeometry = new THREE.OctahedronGeometry(0.32);
         const octaMaterial = new THREE.MeshStandardMaterial({
-          color: 0x8fb8ff,
-          roughness: 0.35,
-          metalness: 0.2,
+          color: 0x7da6ff,
+          emissive: 0x7da6ff,
+          emissiveIntensity: 0.25,
+          roughness: 0.25,
+          metalness: 0.4,
           flatShading: true,
         });
         const octa = new THREE.Mesh(octaGeometry, octaMaterial);
         scene.add(octa);
 
-        // Mouse reaction (eased)
+        // Mouse reaction (eased parallax)
         const mouse = { x: 0, y: 0 };
         const eased = { x: 0, y: 0 };
         const onPointerMove = (e: PointerEvent) => {
@@ -86,7 +111,7 @@ export default function HeroScene() {
         };
         window.addEventListener('pointermove', onPointerMove, { passive: true });
 
-        // Reduced motion: render a single static frame, no auto-rotation
+        // Reduced motion check
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         const clock = { t: 0 };
@@ -98,19 +123,24 @@ export default function HeroScene() {
           eased.y += (mouse.y - eased.y) * 0.05;
 
           if (!reduceMotion) {
-            knot.rotation.x = clock.t * 0.35 + eased.y * 0.5;
-            knot.rotation.y = clock.t * 0.5 + eased.x * 0.7;
+            knot.rotation.x = clock.t * 0.35 + eased.y * 0.4;
+            knot.rotation.y = clock.t * 0.48 + eased.x * 0.55;
+
+            wireMesh.rotation.x = -clock.t * 0.18 + eased.y * 0.2;
+            wireMesh.rotation.y = -clock.t * 0.22 + eased.x * 0.25;
           } else {
-            knot.rotation.x = eased.y * 0.3;
-            knot.rotation.y = eased.x * 0.4;
+            knot.rotation.x = eased.y * 0.25;
+            knot.rotation.y = eased.x * 0.35;
+            wireMesh.rotation.x = eased.y * 0.15;
+            wireMesh.rotation.y = eased.x * 0.15;
           }
 
-          const a = clock.t * 0.9;
+          const a = clock.t * 0.85;
           sphere.position.set(Math.cos(a) * 2.5, Math.sin(a * 1.3) * 0.7, Math.sin(a) * 2.5);
           sphere.rotation.x = clock.t * 0.8;
           sphere.rotation.y = clock.t * 0.6;
 
-          const b = clock.t * 0.7 + Math.PI;
+          const b = clock.t * 0.68 + Math.PI;
           octa.position.set(Math.cos(b) * 2.9, Math.sin(b * 1.1) * 0.9, Math.sin(b) * 2.9);
           octa.rotation.x = clock.t * 0.7;
           octa.rotation.y = clock.t * 0.9;
@@ -120,7 +150,7 @@ export default function HeroScene() {
         };
         frame();
 
-        // Pause rendering when the hero is off-screen
+        // Pause rendering when off-screen
         observer = new IntersectionObserver(
           ([entry]) => {
             if (disposed) return;
@@ -133,7 +163,7 @@ export default function HeroScene() {
         );
         observer.observe(mount);
 
-        // Resize
+        // Resize handler
         const onResize = () => {
           const w = mount.clientWidth;
           const h = mount.clientHeight;
@@ -153,6 +183,8 @@ export default function HeroScene() {
           if (observer) observer.disconnect();
           knotGeometry.dispose();
           knotMaterial.dispose();
+          wireGeometry.dispose();
+          wireMaterial.dispose();
           sphereGeometry.dispose();
           sphereMaterial.dispose();
           octaGeometry.dispose();
@@ -163,7 +195,6 @@ export default function HeroScene() {
           }
         };
       } catch (err) {
-        // WebGL unavailable or any failure: page keeps working without the scene.
         console.warn('HeroScene: 3D scene unavailable, continuing without it.', err);
       }
     };
@@ -180,7 +211,7 @@ export default function HeroScene() {
     <div
       ref={mountRef}
       aria-hidden="true"
-      className="absolute inset-0 w-full h-full"
+      className="absolute inset-0 w-full h-full opacity-60 md:opacity-100 transition-opacity"
     />
   );
 }

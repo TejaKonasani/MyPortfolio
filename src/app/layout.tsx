@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Bricolage_Grotesque, Instrument_Serif, DM_Mono } from 'next/font/google';
+import ScrollProgress from '@/components/ui/ScrollProgress';
+import Cursor from '@/components/ui/Cursor';
 import './globals.css';
 
 const bricolage = Bricolage_Grotesque({
@@ -67,7 +69,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#F0EBE0',
+  themeColor: '#0c0c0e',
+  colorScheme: 'dark',
 };
 
 export default function RootLayout({
@@ -76,10 +79,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark" style={{ colorScheme: 'dark' }}>
       <body
-        className={`${bricolage.variable} ${instrumentSerif.variable} ${dmMono.variable} bg-bg text-ink min-h-screen antialiased`}
+        className={`${bricolage.variable} ${instrumentSerif.variable} ${dmMono.variable} bg-bg text-main min-h-screen antialiased selection:bg-lime selection:text-[#0c0c0e]`}
       >
+        <ScrollProgress />
+        <Cursor />
         {children}
       </body>
     </html>

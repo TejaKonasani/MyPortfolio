@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#120d1f" />
+      <stop offset="50%" stop-color="#191329" />
+      <stop offset="100%" stop-color="#0e0a17" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#241b3a" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#181228" stop-opacity="0.9" />
+    </linearGradient>
+    <linearGradient id="btnGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="30" result="blur" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" rx="16" fill="url(#bgGrad)" />
+  <circle cx="200" cy="150" r="140" fill="#7c3aed" opacity="0.18" filter="url(#softGlow)" />
+  <circle cx="650" cy="350" r="160" fill="#a855f7" opacity="0.12" filter="url(#softGlow)" />
+
+  <!-- Navbar Mockup -->
+  <rect x="50" y="35" width="700" height="42" rx="10" fill="#1f1832" stroke="#342852" stroke-width="1" />
+  <circle cx="75" cy="56" r="6" fill="#a855f7" />
+  <text x="92" y="61" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="700" font-size="14" letter-spacing="0.5">MedSpaces</text>
+  <rect x="550" y="44" width="80" height="24" rx="12" fill="url(#btnGrad)" />
+  <text x="590" y="60" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="600" font-size="10.5" text-anchor="middle">Book Space</text>
+  <rect x="645" y="44" width="85" height="24" rx="12" fill="#2d2247" stroke="#48376e" stroke-width="1" />
+  <text x="687" y="60" fill="#c4b5fd" font-family="system-ui, sans-serif" font-weight="600" font-size="10.5" text-anchor="middle">Doctor Login</text>
+
+  <!-- Left Main Hero Card -->
+  <rect x="50" y="98" width="450" height="360" rx="16" fill="url(#cardGrad)" stroke="#382c58" stroke-width="1.5" />
+  <rect x="80" y="132" width="125" height="22" rx="11" fill="#7c3aed" fill-opacity="0.25" stroke="#8b5cf6" stroke-width="1" />
+  <text x="142" y="147" fill="#c4b5fd" font-family="system-ui, sans-serif" font-weight="600" font-size="10" text-anchor="middle">HEALTHCARE MARKETPLACE</text>
+
+  <text x="80" y="200" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="800" font-size="28" letter-spacing="-0.5">Connected Healthcare</text>
+  <text x="80" y="236" fill="#c4b5fd" font-family="system-ui, sans-serif" font-weight="800" font-size="28" letter-spacing="-0.5">for Better Outcomes</text>
+
+  <text x="80" y="278" fill="#9d8bb8" font-family="system-ui, sans-serif" font-size="13" line-height="1.5">
+    Discover consultation spaces, book verified OPD rooms,
+  </text>
+  <text x="80" y="298" fill="#9d8bb8" font-family="system-ui, sans-serif" font-size="13">
+    and streamline clinical operations with role-based workflows.
+  </text>
+
+  <!-- Search pill inside Hero -->
+  <rect x="80" y="340" width="390" height="46" rx="12" fill="#150f24" stroke="#45356e" stroke-width="1" />
+  <text x="105" y="368" fill="#816ea2" font-family="system-ui, sans-serif" font-size="12">Search by city, clinic or specialization...</text>
+  <rect x="375" y="347" width="85" height="32" rx="8" fill="url(#btnGrad)" />
+  <text x="417" y="367" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="600" font-size="11.5" text-anchor="middle">Search</text>
+
+  <!-- Right Floating UI Elements -->
+  <!-- Booking Card -->
+  <rect x="520" y="98" width="230" height="210" rx="14" fill="#1b142d" stroke="#3b2d5d" stroke-width="1.5" />
+  <circle cx="550" cy="130" r="16" fill="#8b5cf6" fill-opacity="0.3" />
+  <text x="550" y="135" fill="#a855f7" font-family="system-ui, sans-serif" font-size="15" text-anchor="middle">🏥</text>
+  <text x="580" y="128" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="700" font-size="13">Apollo Clinic OPD</text>
+  <text x="580" y="144" fill="#8c78ad" font-family="system-ui, sans-serif" font-size="10.5">Jubilee Hills, Hyd</text>
+
+  <line x1="540" y1="164" x2="730" y2="164" stroke="#2d2247" stroke-width="1" />
+  <text x="545" y="186" fill="#9d8bb8" font-family="system-ui, sans-serif" font-size="11">Available Slots</text>
+  <rect x="545" y="198" width="52" height="26" rx="6" fill="#291e45" stroke="#8b5cf6" stroke-width="1" />
+  <text x="571" y="215" fill="#c4b5fd" font-family="system-ui, sans-serif" font-weight="600" font-size="10" text-anchor="middle">09:00 AM</text>
+  <rect x="605" y="198" width="52" height="26" rx="6" fill="#291e45" stroke="#3d2d66" stroke-width="1" />
+  <text x="631" y="215" fill="#9d8bb8" font-family="system-ui, sans-serif" font-size="10" text-anchor="middle">11:30 AM</text>
+  <rect x="665" y="198" width="52" height="26" rx="6" fill="#291e45" stroke="#3d2d66" stroke-width="1" />
+  <text x="691" y="215" fill="#9d8bb8" font-family="system-ui, sans-serif" font-size="10" text-anchor="middle">02:00 PM</text>
+
+  <rect x="545" y="244" width="180" height="34" rx="8" fill="url(#btnGrad)" />
+  <text x="635" y="265" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="600" font-size="11" text-anchor="middle">Instant Book Slot</text>
+
+  <!-- Mini Stats Card -->
+  <rect x="520" y="325" width="230" height="133" rx="14" fill="#1b142d" stroke="#3b2d5d" stroke-width="1.5" />
+  <text x="545" y="356" fill="#8c78ad" font-family="system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.5">VERIFIED SPACES</text>
+  <text x="545" y="396" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="800" font-size="32">120+</text>
+  <text x="625" y="392" fill="#10b981" font-family="system-ui, sans-serif" font-weight="600" font-size="12">✦ 98.4% Fill Rate</text>
+  <text x="545" y="424" fill="#6f5e8f" font-family="system-ui, sans-serif" font-size="10.5">14 Specialty Clinics &amp; Hospitals</text>
+</svg>

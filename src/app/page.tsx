@@ -6,7 +6,6 @@ import About from '@/components/About';
 import Work from '@/components/Work';
 import Stack from '@/components/Stack';
 import Path from '@/components/Path';
-import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -14,14 +13,13 @@ export default function Home() {
     <>
       <Background />
       <Header />
-      <main>
+      <main id="main">
         <Hero />
         <Marquee />
         <About />
         <Work />
         <Stack />
         <Path />
-        <Contact />
       </main>
       <Footer />
     </>

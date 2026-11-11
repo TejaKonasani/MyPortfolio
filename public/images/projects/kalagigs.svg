@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="kgBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff8f3" />
+      <stop offset="100%" stop-color="#faece2" />
+    </linearGradient>
+    <linearGradient id="kgAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b91c1c" />
+      <stop offset="100%" stop-color="#ea580c" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" rx="16" fill="url(#kgBg)" />
+
+  <!-- Navbar -->
+  <rect x="50" y="35" width="700" height="42" rx="10" fill="#ffffff" stroke="#f1d6c4" stroke-width="1" />
+  <circle cx="75" cy="56" r="6" fill="#ea580c" />
+  <text x="92" y="61" fill="#7f1d1d" font-family="system-ui, sans-serif" font-weight="800" font-size="15" letter-spacing="0.5">KalaGigs</text>
+  <text x="320" y="60" fill="#78350f" font-family="system-ui, sans-serif" font-size="12" font-weight="500">Singers</text>
+  <text x="385" y="60" fill="#78350f" font-family="system-ui, sans-serif" font-size="12" font-weight="500">Live Bands</text>
+  <text x="465" y="60" fill="#78350f" font-family="system-ui, sans-serif" font-size="12" font-weight="500">Comedians</text>
+  <rect x="625" y="44" width="105" height="24" rx="12" fill="url(#kgAccent)" />
+  <text x="677" y="60" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="600" font-size="10.5" text-anchor="middle">Book Artist</text>
+
+  <!-- Hero Content -->
+  <text x="400" y="145" fill="#7f1d1d" font-family="system-ui, sans-serif" font-weight="800" font-size="34" letter-spacing="-0.5" text-anchor="middle">
+    Book Amazing Artists
+  </text>
+  <text x="400" y="185" fill="#c2410c" font-family="system-ui, sans-serif" font-weight="800" font-size="30" letter-spacing="-0.5" text-anchor="middle">
+    for Your Events
+  </text>
+  <text x="400" y="215" fill="#9a3412" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">
+    Verified singers, musicians, DJs, and live performers for weddings, corporate galas &amp; festivals.
+  </text>
+
+  <!-- Search Bar -->
+  <rect x="160" y="240" width="480" height="46" rx="23" fill="#ffffff" stroke="#e0b9a0" stroke-width="1.5" />
+  <text x="195" y="268" fill="#a8a29e" font-family="system-ui, sans-serif" font-size="12">Search artist name, genre, city...</text>
+  <rect x="525" y="245" width="108" height="36" rx="18" fill="url(#kgAccent)" />
+  <text x="579" y="267" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="600" font-size="12" text-anchor="middle">Find Talent</text>
+
+  <!-- Featured Artist Cards Row -->
+  <!-- Card 1 -->
+  <g transform="translate(100, 310)">
+    <rect width="180" height="150" rx="12" fill="#ffffff" stroke="#f0cfb8" stroke-width="1" />
+    <rect x="10" y="10" width="160" height="85" rx="8" fill="#fed7aa" />
+    <circle cx="90" cy="52" r="26" fill="#f97316" />
+    <text x="90" y="58" fill="#ffffff" font-size="20" text-anchor="middle">🎤</text>
+    <text x="15" y="115" fill="#431407" font-family="system-ui, sans-serif" font-weight="700" font-size="13">Aarav Sharma</text>
+    <text x="15" y="132" fill="#9a3412" font-family="system-ui, sans-serif" font-size="10.5">Sufi &amp; Bollywood Singer</text>
+  </g>
+
+  <!-- Card 2 -->
+  <g transform="translate(310, 310)">
+    <rect width="180" height="150" rx="12" fill="#ffffff" stroke="#f0cfb8" stroke-width="1" />
+    <rect x="10" y="10" width="160" height="85" rx="8" fill="#fecdd3" />
+    <circle cx="90" cy="52" r="26" fill="#e11d48" />
+    <text x="90" y="58" fill="#ffffff" font-size="20" text-anchor="middle">🎸</text>
+    <text x="15" y="115" fill="#431407" font-family="system-ui, sans-serif" font-weight="700" font-size="13">The Raag Project</text>
+    <text x="15" y="132" fill="#9a3412" font-family="system-ui, sans-serif" font-size="10.5">Fusion Rock Band</text>
+  </g>
+
+  <!-- Card 3 -->
+  <g transform="translate(520, 310)">
+    <rect width="180" height="150" rx="12" fill="#ffffff" stroke="#f0cfb8" stroke-width="1" />
+    <rect x="10" y="10" width="160" height="85" rx="8" fill="#fef08a" />
+    <circle cx="90" cy="52" r="26" fill="#ca8a04" />
+    <text x="90" y="58" fill="#ffffff" font-size="20" text-anchor="middle">🎧</text>
+    <text x="15" y="115" fill="#431407" font-family="system-ui, sans-serif" font-weight="700" font-size="13">DJ Maya V</text>
+    <text x="15" y="132" fill="#9a3412" font-family="system-ui, sans-serif" font-size="10.5">Electronic &amp; Commercial</text>
+  </g>
+</svg>
